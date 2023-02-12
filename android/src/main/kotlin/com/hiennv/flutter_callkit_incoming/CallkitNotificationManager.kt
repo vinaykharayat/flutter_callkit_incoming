@@ -92,8 +92,8 @@ class CallkitNotificationManager(private val context: Context) {
 
         notificationId = data.getString(EXTRA_CALLKIT_ID, "callkit_incoming").hashCode()
         createNotificationChanel(
-            data.getString(EXTRA_CALLKIT_INCOMING_CALL_NOTIFICATION_CHANNEL_NAME, "Incoming Call"),
-            data.getString(EXTRA_CALLKIT_MISSED_CALL_NOTIFICATION_CHANNEL_NAME, "Missed Call"),
+            data.getString(EXTRA_CALLKIT_INCOMING_CALL_NOTIFICATION_CHANNEL_NAME, "Incoming Ride Request"),
+            data.getString(EXTRA_CALLKIT_MISSED_CALL_NOTIFICATION_CHANNEL_NAME, "Missed Ride Request"),
         )
 
         notificationBuilder = NotificationCompat.Builder(context, NOTIFICATION_CHANNEL_ID_INCOMING)
@@ -196,10 +196,7 @@ class CallkitNotificationManager(private val context: Context) {
                 R.id.tvNumber,
                 data.getString(EXTRA_CALLKIT_HANDLE, "")
         )
-        remoteViews.setOnClickPendingIntent(
-                R.id.llDecline,
-                getDeclinePendingIntent(notificationId, data)
-        )
+
         val textDecline = data.getString(EXTRA_CALLKIT_TEXT_DECLINE, "")
         remoteViews.setTextViewText(
                 R.id.tvDecline,
