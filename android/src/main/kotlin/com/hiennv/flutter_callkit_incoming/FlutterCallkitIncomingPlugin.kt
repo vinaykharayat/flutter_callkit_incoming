@@ -188,13 +188,6 @@ class FlutterCallkitIncomingPlugin : FlutterPlugin, MethodCallHandler, ActivityA
                                     it.toBundle()
                                 )
                             )
-                        } else {
-                            context?.sendBroadcast(
-                                CallkitIncomingBroadcastReceiver.getIntentDecline(
-                                    requireNotNull(context),
-                                    it.toBundle()
-                                )
-                            )
                         }
                     }
                     removeAllCalls(context)

@@ -44,7 +44,6 @@ import android.os.PowerManager
 import android.os.PowerManager.WakeLock
 import android.text.TextUtils
 import com.hiennv.flutter_callkit_incoming.CallkitIncomingBroadcastReceiver.Companion.EXTRA_CALLKIT_TEXT_ACCEPT
-import com.hiennv.flutter_callkit_incoming.CallkitIncomingBroadcastReceiver.Companion.EXTRA_CALLKIT_TEXT_DECLINE
 
 
 class CallkitIncomingActivity : Activity() {
@@ -91,9 +90,6 @@ class CallkitIncomingActivity : Activity() {
     private lateinit var llAction: LinearLayout
     private lateinit var ivAcceptCall: ImageView
     private lateinit var tvAccept: TextView
-
-    private lateinit var ivDeclineCall: ImageView
-    private lateinit var tvDecline: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -193,8 +189,6 @@ class CallkitIncomingActivity : Activity() {
 
         val textAccept = data?.getString(EXTRA_CALLKIT_TEXT_ACCEPT, "")
         tvAccept.text = if (TextUtils.isEmpty(textAccept)) getString(R.string.text_accept) else textAccept
-        val textDecline = data?.getString(EXTRA_CALLKIT_TEXT_DECLINE, "")
-        tvDecline.text = if (TextUtils.isEmpty(textDecline)) getString(R.string.text_decline) else textDecline
 
         val backgroundColor = data?.getString(EXTRA_CALLKIT_BACKGROUND_COLOR, "#0955fa")
         try {
@@ -253,15 +247,10 @@ class CallkitIncomingActivity : Activity() {
 
         ivAcceptCall = findViewById(R.id.ivAcceptCall)
         tvAccept = findViewById(R.id.tvAccept)
-        ivDeclineCall = findViewById(R.id.ivDeclineCall)
-        tvDecline = findViewById(R.id.tvDecline)
         animateAcceptCall()
 
         ivAcceptCall.setOnClickListener {
             onAcceptClick()
-        }
-        ivDeclineCall.setOnClickListener {
-            onDeclineClick()
         }
     }
 
@@ -291,18 +280,6 @@ class CallkitIncomingActivity : Activity() {
             val keyguardManager = getSystemService(Context.KEYGUARD_SERVICE) as KeyguardManager
             keyguardManager.requestDismissKeyguard(this, null)
         }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            finishAndRemoveTask()
-        } else {
-            finish()
-        }
-    }
-
-    private fun onDeclineClick() {
-        val data = intent.extras?.getBundle(EXTRA_CALLKIT_INCOMING_DATA)
-        val intent =
-                CallkitIncomingBroadcastReceiver.getIntentDecline(this@CallkitIncomingActivity, data)
-        sendBroadcast(intent)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             finishAndRemoveTask()
         } else {

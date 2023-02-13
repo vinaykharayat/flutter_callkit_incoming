@@ -16,8 +16,6 @@ class CallkitIncomingBroadcastReceiver : BroadcastReceiver() {
         const val ACTION_CALL_START = "com.hiennv.flutter_callkit_incoming.ACTION_CALL_START"
         const val ACTION_CALL_ACCEPT =
                 "com.hiennv.flutter_callkit_incoming.ACTION_CALL_ACCEPT"
-        const val ACTION_CALL_DECLINE =
-                "com.hiennv.flutter_callkit_incoming.ACTION_CALL_DECLINE"
         const val ACTION_CALL_ENDED =
                 "com.hiennv.flutter_callkit_incoming.ACTION_CALL_ENDED"
         const val ACTION_CALL_TIMEOUT =
@@ -36,7 +34,6 @@ class CallkitIncomingBroadcastReceiver : BroadcastReceiver() {
         const val EXTRA_CALLKIT_AVATAR = "EXTRA_CALLKIT_AVATAR"
         const val EXTRA_CALLKIT_DURATION = "EXTRA_CALLKIT_DURATION"
         const val EXTRA_CALLKIT_TEXT_ACCEPT = "EXTRA_CALLKIT_TEXT_ACCEPT"
-        const val EXTRA_CALLKIT_TEXT_DECLINE = "EXTRA_CALLKIT_TEXT_DECLINE"
         const val EXTRA_CALLKIT_TEXT_MISSED_CALL = "EXTRA_CALLKIT_TEXT_MISSED_CALL"
         const val EXTRA_CALLKIT_TEXT_CALLBACK = "EXTRA_CALLKIT_TEXT_CALLBACK"
         const val EXTRA_CALLKIT_EXTRA = "EXTRA_CALLKIT_EXTRA"
@@ -71,12 +68,6 @@ class CallkitIncomingBroadcastReceiver : BroadcastReceiver() {
         fun getIntentAccept(context: Context, data: Bundle?) =
                 Intent(context, CallkitIncomingBroadcastReceiver::class.java).apply {
                     action = "${context.packageName}.${ACTION_CALL_ACCEPT}"
-                    putExtra(EXTRA_CALLKIT_INCOMING_DATA, data)
-                }
-
-        fun getIntentDecline(context: Context, data: Bundle?) =
-                Intent(context, CallkitIncomingBroadcastReceiver::class.java).apply {
-                    action = "${context.packageName}.${ACTION_CALL_DECLINE}"
                     putExtra(EXTRA_CALLKIT_INCOMING_DATA, data)
                 }
 
@@ -140,16 +131,7 @@ class CallkitIncomingBroadcastReceiver : BroadcastReceiver() {
                     error.printStackTrace()
                 }
             }
-            "${context.packageName}.${ACTION_CALL_DECLINE}" -> {
-                try {
-                    sendEventFlutter(ACTION_CALL_DECLINE, data)
-                    context.stopService(Intent(context, CallkitSoundPlayerService::class.java))
-                    callkitNotificationManager.clearIncomingNotification(data)
-                    removeCall(context, Data.fromBundle(data))
-                } catch (error: Exception) {
-                    error.printStackTrace()
-                }
-            }
+
             "${context.packageName}.${ACTION_CALL_ENDED}" -> {
                 try {
                     sendEventFlutter(ACTION_CALL_ENDED, data)
@@ -216,7 +198,6 @@ class CallkitIncomingBroadcastReceiver : BroadcastReceiver() {
                 "type" to data.getInt(EXTRA_CALLKIT_TYPE, 0),
                 "duration" to data.getLong(EXTRA_CALLKIT_DURATION, 0L),
                 "textAccept" to data.getString(EXTRA_CALLKIT_TEXT_ACCEPT, ""),
-                "textDecline" to data.getString(EXTRA_CALLKIT_TEXT_DECLINE, ""),
                 "textMissedCall" to data.getString(EXTRA_CALLKIT_TEXT_MISSED_CALL, ""),
                 "textCallback" to data.getString(EXTRA_CALLKIT_TEXT_CALLBACK, ""),
                 "extra" to data.getSerializable(EXTRA_CALLKIT_EXTRA) as HashMap<String, Any?>,
