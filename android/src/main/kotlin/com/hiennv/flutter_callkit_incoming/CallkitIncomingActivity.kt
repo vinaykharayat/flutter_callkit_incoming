@@ -209,7 +209,6 @@ class CallkitIncomingActivity : Activity() {
 
 		try {
 			tvAccept.setTextColor(Color.parseColor(textColor))
-			tvDecline.setTextColor(Color.parseColor(textColor))
 		} catch (error: Exception) {
 		}
 
@@ -293,6 +292,20 @@ class CallkitIncomingActivity : Activity() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val keyguardManager = getSystemService(Context.KEYGUARD_SERVICE) as KeyguardManager
             keyguardManager.requestDismissKeyguard(this, null)
+        }
+    }
+
+    private fun finishDelayed() {
+        Handler(Looper.getMainLooper()).postDelayed({
+            finishTask()
+        }, 1000)
+    }
+
+    private fun finishTask() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            finishAndRemoveTask()
+        } else {
+            finish()
         }
     }
 

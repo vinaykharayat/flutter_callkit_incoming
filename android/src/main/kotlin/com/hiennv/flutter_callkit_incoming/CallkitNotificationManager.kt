@@ -237,15 +237,7 @@ class CallkitNotificationManager(private val context: Context) {
                 data.getString(CallkitConstants.EXTRA_CALLKIT_HANDLE, "")
             )
         }
-        remoteViews.setOnClickPendingIntent(
-            R.id.llDecline,
-            getDeclinePendingIntent(notificationId, data)
-        )
-        val textDecline = data.getString(CallkitConstants.EXTRA_CALLKIT_TEXT_DECLINE, "")
-        remoteViews.setTextViewText(
-            R.id.tvDecline,
-            if (TextUtils.isEmpty(textDecline)) context.getString(R.string.text_decline) else textDecline
-        )
+        
         remoteViews.setOnClickPendingIntent(
             R.id.llAccept,
             getAcceptPendingIntent(notificationId, data)
@@ -496,11 +488,6 @@ class CallkitNotificationManager(private val context: Context) {
             data
         )
         return PendingIntent.getActivity(context, id, intentTransparent, getFlagPendingIntent())
-    }
-
-    private fun getDeclinePendingIntent(id: Int, data: Bundle): PendingIntent {
-        val declineIntent = CallkitIncomingBroadcastReceiver.getIntentDecline(context, data)
-        return PendingIntent.getBroadcast(context, id, declineIntent, getFlagPendingIntent())
     }
 
     private fun getTimeOutPendingIntent(id: Int, data: Bundle): PendingIntent {

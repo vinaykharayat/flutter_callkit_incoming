@@ -38,12 +38,6 @@ class CallkitIncomingBroadcastReceiver : BroadcastReceiver() {
                 putExtra(CallkitConstants.EXTRA_CALLKIT_INCOMING_DATA, data)
             }
 
-        fun getIntentEnded(context: Context, data: Bundle?) =
-            Intent(context, CallkitIncomingBroadcastReceiver::class.java).apply {
-                action = "${context.packageName}.${CallkitConstants.ACTION_CALL_ENDED}"
-                putExtra(CallkitConstants.EXTRA_CALLKIT_INCOMING_DATA, data)
-            }
-
         fun getIntentTimeout(context: Context, data: Bundle?) =
             Intent(context, CallkitIncomingBroadcastReceiver::class.java).apply {
                 action = "${context.packageName}.${CallkitConstants.ACTION_CALL_TIMEOUT}"
