@@ -197,7 +197,7 @@ class CallkitNotificationManager(private val context: Context) {
                 notificationBuilder.setStyle(
                     NotificationCompat.CallStyle.forIncomingCall(
                         person,
-                        null,
+                        getAcceptPendingIntent(notificationId, data),
                         getAcceptPendingIntent(notificationId, data),
                     )
                         .setIsVideo(typeCall > 0)
