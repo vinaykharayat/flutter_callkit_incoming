@@ -1,3 +1,92 @@
+## 2.0.4+2
+* add func `requestFullIntentPermission` (Android 14+) thank @Spyspyspy https://github.com/hiennguyen92/flutter_callkit_incoming/pull/584
+* set Notification call style (Android) thank @AAkira https://github.com/hiennguyen92/flutter_callkit_incoming/pull/553
+* Many other issues
+    1. add prop `accepted` in activeCalls (iOS) thank @vasilich6107
+    2. 
+
+## 2.0.4+1
+* Removed `Telecom Framework` (Android)
+
+## 2.0.4
+* Removed `Telecom Framework` (Android)
+* Fixed hide notification for action `CallBack` (Android)
+
+## 2.0.3
+* Fixed linked func `hideCallkitIncoming`
+
+## 2.0.2+2
+* Fixed linked func `hideCallkitIncoming`
+
+## 2.0.2+1
+* Fixed linked func `hideCallkitIncoming`
+
+## 2.0.2
+* Add func `hideCallkitIncoming` clear the incoming notification/ring (after accept/decline/timeout)
+* Add props `isShowFullLockedScreen` on Android
+* Fixed example/Fixed update android 14
+
+## 2.0.1+2
+* Add Action for onDecline
+* Add Action for onEnd
+* add android props `isShowCallID`
+
+## 2.0.1+1
+* Add Callback AVAudioSession for WebRTC setup
+* Fix issue no audio for using WebRTC
+
+## 2.0.1-dev.2
+* Add Action for onAccept
+
+## 2.0.1-dev.1
+* Add AVAudioSession Appdelegate(iOS)
+
+## 2.0.1-dev
+* Add AVAudioSession Appdelegate(iOS)
+
+## 2.0.1
+
+* Fixed some bugs.
+* `Android` using Telecom Framework
+* Add `silenceEvents`
+* Add `normalHandle` props https://github.com/hiennguyen92/flutter_callkit_incoming/pull/403
+* Android add `textColor` props https://github.com/hiennguyen92/flutter_callkit_incoming/pull/398
+* Android invisible avatar for default https://github.com/hiennguyen92/flutter_callkit_incoming/pull/393
+* Add Method for call API when accept/decline/end/timeout
+
+## 2.0.0+2
+
+* Fixed some bugs.
+* Support request permission for Android 13+ `requestNotificationPermission`
+
+## 2.0.0+1
+
+* Fixed some bugs.
+* Add `landscape` for tablet
+* Fix issue head-up for redmi / xiaomi devices
+
+## 2.0.0
+
+* Fixed some bugs.
+* Adapt flutter_lints and use lowerCamelCase to Event enum
+* Rename properties 
+        `textMisssedCall` -> `subtitle`,
+        `textCallback` -> `callbackText`,
+        `isShowMissedCallNotification` -> `showNotification`,
+* Move inside properties `missedCallNotification {showNotification, isShowCallback, subtitle, callbackText}`
+* Add setCallConnected option iOS `await FlutterCallkitIncoming.setCallConnected(this._currentUuid)`
+* Add hold option iOS
+* Add mute call option iOS
+* Many other issues
+    1. Thank @ryojiro
+    https://github.com/hiennguyen92/flutter_callkit_incoming/pull/263
+    https://github.com/hiennguyen92/flutter_callkit_incoming/pull/264
+    https://github.com/hiennguyen92/flutter_callkit_incoming/pull/262
+    2. Many Thank @mouEsam
+    https://github.com/hiennguyen92/flutter_callkit_incoming/pull/227
+    3. ...
+
+
 ## 1.0.3+3
 
 * Update README.md
