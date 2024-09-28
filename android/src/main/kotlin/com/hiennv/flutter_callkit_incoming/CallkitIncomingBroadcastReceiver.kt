@@ -106,17 +106,6 @@ class CallkitIncomingBroadcastReceiver : BroadcastReceiver() {
                 }
             }
 
-            "${context.packageName}.${ACTION_CALL_ENDED}" -> {
-                try {
-                    sendEventFlutter(CallkitConstants.ACTION_CALL_ENDED, data)
-                    context.stopService(Intent(context, CallkitSoundPlayerService::class.java))
-                    callkitNotificationManager.clearIncomingNotification(data, false)
-                    removeCall(context, Data.fromBundle(data))
-                } catch (error: Exception) {
-                    Log.e(TAG, null, error)
-                }
-            }
-
             "${context.packageName}.${CallkitConstants.ACTION_CALL_TIMEOUT}" -> {
                 try {
                     sendEventFlutter(CallkitConstants.ACTION_CALL_TIMEOUT, data)

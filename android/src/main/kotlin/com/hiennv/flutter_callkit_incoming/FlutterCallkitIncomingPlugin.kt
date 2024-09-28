@@ -116,25 +116,11 @@ class FlutterCallkitIncomingPlugin : FlutterPlugin, MethodCallHandler, ActivityA
     }
 
     public fun endCall(data: Data) {
-        context?.sendBroadcast(
-                CallkitIncomingBroadcastReceiver.getIntentEnded(
-                        requireNotNull(context),
-                        data.toBundle()
-                )
-        )
+        
     }
 
     public fun endAllCalls() {
-        val calls = getDataActiveCalls(context)
-        calls.forEach {
-            context?.sendBroadcast(
-                    CallkitIncomingBroadcastReceiver.getIntentEnded(
-                            requireNotNull(context),
-                            it.toBundle()
-                    )
-            )
-        }
-        removeAllCalls(context)
+        
     }
 
     public fun sendEventCustom(body: Map<String, Any>) {
@@ -215,14 +201,7 @@ class FlutterCallkitIncomingPlugin : FlutterPlugin, MethodCallHandler, ActivityA
                 }
 
                 "endCall" -> {
-                    val data = Data(call.arguments() ?: HashMap())
-                    context?.sendBroadcast(
-                            CallkitIncomingBroadcastReceiver.getIntentEnded(
-                                    requireNotNull(context),
-                                    data.toBundle()
-                            )
-                    )
-
+                    
                     result.success("OK")
                 }
 
@@ -231,18 +210,7 @@ class FlutterCallkitIncomingPlugin : FlutterPlugin, MethodCallHandler, ActivityA
                 }
 
                 "endAllCalls" -> {
-                    val calls = getDataActiveCalls(context)
-                    calls.forEach {
-                        if (it.isAccepted) {
-                            context?.sendBroadcast(
-                                    CallkitIncomingBroadcastReceiver.getIntentEnded(
-                                            requireNotNull(context),
-                                            it.toBundle()
-                                    )
-                            )
-                        }
-                    }
-                    removeAllCalls(context)
+                    
                     result.success("OK")
                 }
 
